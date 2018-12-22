@@ -50,11 +50,15 @@ function trimepayForWepay_link($params) {
 	];
 
 	
-	$payData['payType'] = 'WEPAY_JSAPI';
+	$payData['payType'] = $payData['payType'] = stristr($_SERVER['HTTP_USER_AGENT'], 'mobile')?'WEPAY_JSAPI':'WEPAY_QR';;
 	$signData = $trimepay->prepareSign($payData);
 	$payData['sign'] = $trimepay->sign($signData);
-	$qcodelink = urlencode("http://cashier.hlxpay.com/#/wepay/jsapi?payData=".base64_encode(json_encode($payData)));
-	
+	if(stristr($_SERVER['HTTP_USER_AGENT'], 'mobile')){
+		$qcodelink = urlencode("http://cashier.hlxpay.com/#/wepay/jsapi?payData=".base64_encode(json_encode($payData)));
+	}else{
+		$response = $trimepay->post($payData);
+		$qcodelink = $response['data'];
+	}
 	$code = '<div class="alipay" style="max-width: 230px;margin: 0 auto">';
 	$code = $code . '<div id="alipayimg" style="border: 1px solid #AAA;border-radius: 4px;overflow: hidden;margin-bottom: 5px;"><img src="https://www.zhihu.com/qrcode?url='.$qcodelink.'" style="transform: scale(.9);width: 100%;height: 100%;"></img></div><!--微信支付ajax跳转-->
         	<a href="javascript:;" id="alipayDiv" class="btn btn-success btn-block">使用微信扫码付款</a></div>';
