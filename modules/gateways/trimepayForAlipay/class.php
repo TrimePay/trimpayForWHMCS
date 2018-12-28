@@ -10,8 +10,8 @@ class Trimepay {
 	public function __construct($appId, $appSecret) {
 	    $this->appId = $appId;
 		$this->appSecret = $appSecret;
-		$this->gatewayUri = 'https://api.ecy.es/gateway/pay/go';
-		$this->refundUri = 'https://api.ecy.es/gateway/refund/go';
+		$this->gatewayUri = 'https://api.trimepay.com/gateway/pay/go';
+		$this->refundUri = 'https://api.trimepay.com/gateway/refund/go';
 	}
 	
 	/**
