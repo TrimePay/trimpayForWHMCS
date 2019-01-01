@@ -36,6 +36,11 @@ function trimepayForWepay_refund($params) {
 }
 
 function trimepayForWepay_link($params) {
+	
+    if (!stristr($_SERVER['PHP_SELF'], 'viewinvoice')) {
+	return '<img style="width: 150px" src="'.$systemurl.'/modules/gateways/trimepayForWepay/wepay.png" alt="微信支付" />';
+    }
+	
     if(!class_exists('Trimepay')) {
         include("trimepayForWepay/class.php");
     }
@@ -62,8 +67,7 @@ function trimepayForWepay_link($params) {
 	$code = '<div class="alipay" style="max-width: 230px;margin: 0 auto">';
 	$code = $code . '<div id="alipayimg" style="border: 1px solid #AAA;border-radius: 4px;overflow: hidden;margin-bottom: 5px;"><img src="https://www.zhihu.com/qrcode?url='.$qcodelink.'" style="transform: scale(.9);width: 100%;height: 100%;"></img></div><!--微信支付ajax跳转-->
         	<a href="javascript:;" id="alipayDiv" class="btn btn-success btn-block">使用微信扫码付款</a></div>';
-	if (stristr($_SERVER['PHP_SELF'], 'viewinvoice')) {
-		return $code.'<script>
+	return $code.'<script>
 		//设置每隔 5000 毫秒执行一次 load() 方法
 		setInterval(function(){load()}, 5000);
 		function load(){
@@ -94,8 +98,5 @@ function trimepayForWepay_link($params) {
 			xmlhttp.send();
 		}
 	</script>';
-	} else {
-		return '<img style="width: 150px" src="'.$systemurl.'/modules/gateways/trimepayForWepay/wepay.png" alt="微信支付" />';
-	}
 }
 ?>
