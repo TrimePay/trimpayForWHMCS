@@ -81,11 +81,7 @@ function trimepayForWepay_link($params) {
 					if(trade_state=="SUCCESS"){
 						document.getElementById("alipayimg").style.display="none";
 						document.getElementById("alipayDiv").innerHTML="支付成功";
-						//延迟 2 秒执行 tz() 方法
-						setTimeout(function(){tz()}, 5000);
-						function tz(){
-							window.location.href="'.$systemurl.'/viewinvoice.php?id='.$params['invoiceid'].'";
-						}
+						window.location.reload()
 					}
 				}
 			}
