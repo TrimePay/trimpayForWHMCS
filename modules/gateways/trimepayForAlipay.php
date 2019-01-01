@@ -37,6 +37,10 @@ function trimepayForAlipay_refund($params) {
 }
 
 function trimepayForAlipay_link($params) {
+	
+    if (!stristr($_SERVER['PHP_SELF'], 'viewinvoice')) {
+	return '<img style="width: 150px" src="'.$systemurl.'/modules/gateways/trimepayForAlipay/alipay.png" alt="支付宝支付" />';   
+    }
     if(!class_exists('Trimepay')) {
         include("trimepayForAlipay/class.php");
     }
@@ -73,7 +77,6 @@ function trimepayForAlipay_link($params) {
     	$code_ajax = '<a href="'.$webpaylink.'" target="_blank" id="alipayDiv" class="btn btn-info btn-block">前往支付宝进行支付</a></div>';
     	$code = $code.$code_ajax;
 	}
-	if (stristr($_SERVER['PHP_SELF'], 'viewinvoice')) {
 		return $code.'<script>
 		//设置每隔 5000 毫秒执行一次 load() 方法
 		setInterval(function(){load()}, 5000);
@@ -105,8 +108,5 @@ function trimepayForAlipay_link($params) {
 			xmlhttp.send();
 		}
 	</script>';
-	} else {
-		return '<img style="width: 150px" src="'.$systemurl.'/modules/gateways/trimepayForAlipay/alipay.png" alt="支付宝支付" />';
-	}
 }
 ?>
