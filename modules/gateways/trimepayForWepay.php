@@ -59,7 +59,7 @@ function trimepayForWepay_link($params) {
 	$signData = $trimepay->prepareSign($payData);
 	$payData['sign'] = $trimepay->sign($signData);
 	if(stristr($_SERVER['HTTP_USER_AGENT'], 'mobile')){
-		$qcodelink = urlencode("http://cashier.hlxpay.com/#/wepay/jsapi?payData=".base64_encode(json_encode($payData)));
+		$qcodelink = urlencode("http://cashier.hlxpay.com/jsapi.html?payData=".base64_encode(json_encode($payData)));
 	}else{
 		$response = $trimepay->post($payData);
 		$qcodelink = $response['data'];
