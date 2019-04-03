@@ -52,7 +52,7 @@ function trimepayForAlipay_link($params) {
 		'merchantTradeNo' => $params['invoiceid'],
 		'totalFee' => $params['amount'] * 100,
 		'notifyUrl' => $systemurl."/modules/gateways/trimepayForAlipay/notify.php",
-		'returnUrl' => $systemurl."viewinvoice.php?id=".$params['invoiceid'],
+		'returnUrl' => $systemurl."/viewinvoice.php?id=".$params['invoiceid'],
 	];
 
 	if($params['qrcode']) {
