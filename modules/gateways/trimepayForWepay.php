@@ -51,7 +51,7 @@ function trimepayForWepay_link($params) {
 		'merchantTradeNo' => $params['invoiceid'],
 		'totalFee' => $params['amount'] * 100,
 		'notifyUrl' => $systemurl."/modules/gateways/trimepayForWepay/notify.php",
-		'returnUrl' => $systemurl."viewinvoice.php?id=".$params['invoiceid'],
+		'returnUrl' => $systemurl."/viewinvoice.php?id=".$params['invoiceid'],
 		'payType' => 'WEPAY_QR'
 	];
 
